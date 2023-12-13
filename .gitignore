@@ -69,3 +69,6 @@ dev.sqlite3
 tags
 
 /dist
+
+# tailwind
+public/output.css
