@@ -1,6 +1,5 @@
 import * as Path from 'node:path'
 import express from 'express'
-import cors, { CorsOptions } from 'cors'
 
 import cars from './routes/car'
 
@@ -14,7 +13,6 @@ server.get('/api/v1/greeting', (req, res) => {
 })
 
 server.use(express.json())
-server.use(cors('*' as CorsOptions))
 
 server.use('/api/v1/cars', cars)
 
