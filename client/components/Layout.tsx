@@ -1,15 +1,36 @@
 import { Outlet } from 'react-router-dom'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated.tsx'
+import { NavGroup, NavButton } from './Styled.tsx'
+import { useAuth0 } from '@auth0/auth0-react'
 
-export default function Layout() {
+function Layout() {
+  const { user, logout, loginWithRedirect } = useAuth0()
+
+  const handleSignOut = () => {
+    logout()
+  }
+
+  const handleSignIn = () => {
+    loginWithRedirect()
+  }
+
   return (
     <>
-      <header>
-        <h1>Website</h1>
-      </header>
+      <NavGroup>
+        <IfAuthenticated>
+          <NavButton onClick={handleSignOut}>Sign out</NavButton>
+          {user && <p>Signed in as: {user?.nickname}</p>}
+        </IfAuthenticated>
+        <IfNotAuthenticated>
+          <NavButton onClick={handleSignIn}>Sign in</NavButton>
+        </IfNotAuthenticated>
+      </NavGroup>
+      <h1>Rent a car!</h1>
       <main>
         <Outlet />
       </main>
-      <footer>Copyright &copy; 2038</footer>
     </>
   )
 }
+
+export default Layout

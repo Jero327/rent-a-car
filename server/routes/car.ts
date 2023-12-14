@@ -1,10 +1,11 @@
 import express from "express"
 
 import * as db from '../db/db'
+import { validateAccessToken } from "../auth0"
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/', validateAccessToken, async (req, res) => {
   try {
     const response = await db.getAllCars()
     res.json(response)
