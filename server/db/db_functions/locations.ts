@@ -2,7 +2,8 @@ import { newLocation, updatedLocation } from '../../../type/locations'
 import db from '../connection'
 
 export async function getAllLocations() {
-  return await db('locations').select()
+  const res = await db('locations').select()
+  return res.reverse()
 }
 
 export async function deleteLocation(locationId: number) {
