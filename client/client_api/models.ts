@@ -25,3 +25,11 @@ export async function removeModel(modelId: number, token: string) {
     .set('Authorization', `Bearer ${token}`)
     .set('Content-Type', 'application/json')
 }
+
+export async function updateModel(modelId: number, newModel: newModel, token: string) {
+  await request
+    .put(`${baseURL}/${modelId}`)
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+    .send(newModel)
+}
