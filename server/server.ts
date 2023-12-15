@@ -1,20 +1,13 @@
 import * as Path from 'node:path'
 import express from 'express'
 
-import cars from './routes/car'
+import models from './routes/models'
 
 const server = express()
 
-server.get('/api/v1/greeting', (req, res) => {
-  const greetings = ['hola', 'hi', 'hello', 'howdy']
-  const index = Math.floor(Math.random() * greetings.length)
-  console.log(index)
-  res.json({ greeting: greetings[index] })
-})
-
 server.use(express.json())
 
-server.use('/api/v1/cars', cars)
+server.use('/api/v1/models', models)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))
