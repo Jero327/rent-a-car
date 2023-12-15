@@ -18,3 +18,10 @@ export async function addModel(newModel: newModel, token: string) {
     .set('Content-Type', 'application/json')
     .send(newModel)
 }
+
+export async function removeModel(modelId: number, token: string) {
+  await request
+    .delete(`${baseURL}/${modelId}`)
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+}

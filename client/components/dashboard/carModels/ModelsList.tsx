@@ -2,6 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useQuery } from '@tanstack/react-query'
 import { getAllModels } from '../../../client_api/models'
 import { model } from '../../../../type/carModels'
+import ModelItem from './ModelItem'
 
 function ModelsList() {
   const { getAccessTokenSilently } = useAuth0()
@@ -28,7 +29,7 @@ function ModelsList() {
             <>
               <ul>
                 {data.map((model: model) => (
-                  <li key={model.id}>{model.name}</li>
+                  <ModelItem key={model.id} { ...model } />
                 ))}
               </ul>
             </>
