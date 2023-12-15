@@ -1,12 +1,12 @@
 // import AddModel from "./AddModel"
-// import ModelsList from "./ModelsList"
+import LocationsList from './LocationsList'
 
 function Locations() {
   return (
     <>
       <h1>This is locations page</h1>
-      {/* <AddModel />
-      <ModelsList /> */}
+      {/* <AddModel /> */}
+      <LocationsList />
     </>
   )
 }
