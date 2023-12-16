@@ -2,7 +2,8 @@ import { newModel, updatedModel } from '../../../type/carModels'
 import db from '../connection'
 
 export async function getAllModels() {
-  return await db('models').select()
+  const res = await db('models').select()
+  return res.reverse()
 }
 
 export async function deleteModel(modelId: number) {
