@@ -28,7 +28,7 @@ function CarProductsList() {
             <>
               <ul>
                 {data.map((c: carProduct) => (
-                  <>{c.rego_number}</>
+                  <li key={c.id}>{c.rego_number}</li>
                 ))}
               </ul>
             </>

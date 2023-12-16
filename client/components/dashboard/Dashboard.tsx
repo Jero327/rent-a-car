@@ -20,8 +20,11 @@ function Dashboard() {
       {user?.sub === 'auth0|657aa87d5284b2ee5d38be4b' ? (
         <>
           <h2>Admin User: {user.name}</h2>
-          <Link to={`/dashboard/models`}>Manage Models</Link><br />
+          <Link to={`/dashboard/models`}>Manage Models</Link>
+          <br />
           <Link to={`/dashboard/locations`}>Manage Locations</Link>
+          <br />
+          <Link to={`/dashboard/carproducts`}>Manage car products</Link>
           <Outlet />
         </>
       ) : (
