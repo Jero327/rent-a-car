@@ -1,4 +1,4 @@
-import CarProductsList from './carProductsList'
+import CarProductsList from './CarProductsList'
 
 function CarProducts() {
   return (
