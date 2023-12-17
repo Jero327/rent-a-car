@@ -2,11 +2,13 @@ import express from 'express'
 
 import * as db from '../db/db_functions/carProducts'
 import { validateAccessToken } from '../auth0'
+import checkAdmin from './checkAdmin'
 
 const router = express.Router()
 
 router.get('/', validateAccessToken, async (req, res) => {
   try {
+    checkAdmin(req)
     const response = await db.getAllCarProducts()
     res.status(200).json(response)
   } catch (error) {
@@ -17,6 +19,7 @@ router.get('/', validateAccessToken, async (req, res) => {
 
 router.delete('/:carProductId', validateAccessToken, async (req, res) => {
   try {
+    checkAdmin(req)
     const carProductId = Number(req.params.carProductId)
     await db.deleteCarProduct(carProductId)
 
@@ -29,6 +32,7 @@ router.delete('/:carProductId', validateAccessToken, async (req, res) => {
 
 router.post('/', validateAccessToken, async (req, res) => {
   try {
+    checkAdmin(req)
     const newCarProduct = req.body
     await db.addCarProduct(newCarProduct)
 
@@ -41,6 +45,7 @@ router.post('/', validateAccessToken, async (req, res) => {
 
 router.put('/:carProductId', validateAccessToken, async (req, res) => {
   try {
+    checkAdmin(req)
     const carProductId = Number(req.params.carProductId)
     const updatedCarProduct = req.body
     await db.editCarProduct(carProductId, updatedCarProduct)
