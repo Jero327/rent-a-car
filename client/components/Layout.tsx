@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated.tsx'
 import { NavGroup, NavButton } from './Styled.tsx'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -25,7 +25,9 @@ function Layout() {
           <NavButton onClick={handleSignIn}>Sign in</NavButton>
         </IfNotAuthenticated>
       </NavGroup>
-      <h1>Rent a car!</h1>
+      <Link to={`/`}>
+        <h1>Rent a car!</h1>
+      </Link>
       <main>
         <Outlet />
       </main>

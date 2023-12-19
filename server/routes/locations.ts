@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.get('/', validateAccessToken, async (req, res) => {
   try {
-    checkAdmin(req)
+    // checkAdmin(req)
     const response = await db.getAllLocations()
     res.status(200).json(response)
   } catch (error) {
