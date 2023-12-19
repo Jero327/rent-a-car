@@ -2,6 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useQuery } from '@tanstack/react-query'
 import { getAllCarProducts } from '../../../client_api/carProducts'
 import { carProductData } from '../../../../type/carProducts'
+import CarProductItem from './CarProductItem'
 
 function CarProductsList() {
   const { getAccessTokenSilently } = useAuth0()
@@ -28,19 +29,7 @@ function CarProductsList() {
             <>
               <ul>
                 {data.map((c: carProductData) => (
-                  <li key={c.id}>
-                    id: {c.id}
-                    <br />
-                    rego_number: {c.rego_number}
-                    <br />
-                    daily_rate: {c.daily_rate}
-                    <br />
-                    location: {c.location}
-                    <br />
-                    model: {c.model}
-                    <br />
-                    is_available: {c.is_available?<>yes</>:<>no</>}
-                  </li>
+                  <CarProductItem key={c.id} {...c} />
                 ))}
               </ul>
             </>
