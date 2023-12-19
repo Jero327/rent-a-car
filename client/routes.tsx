@@ -4,6 +4,7 @@ import HomePage from './components/HomePage'
 import Dashboard from './components/dashboard/Dashboard'
 import Models from './components/dashboard/carModels/Models'
 import Locations from './components/dashboard/locations/Locations'
+import CarProducts from './components/dashboard/carProducts/CarProducts'
 
 export default createRoutesFromElements(
   <Route path="/" element={<Layout />}>
@@ -11,6 +12,7 @@ export default createRoutesFromElements(
     <Route path="dashboard" element={<Dashboard />}>
       <Route path="models" element={<Models />} />
       <Route path="locations" element={<Locations />} />
+      <Route path="carproducts" element={<CarProducts />} />
     </Route>
   </Route>
 )

@@ -1,15 +1,15 @@
-import express from "express"
+import express from 'express'
 
-import * as db from '../db/db_functions/locations'
-import { validateAccessToken } from "../auth0"
-import checkAdmin from "./checkAdmin"
+import * as db from '../db/db_functions/carProducts'
+import { validateAccessToken } from '../auth0'
+import checkAdmin from './checkAdmin'
 
 const router = express.Router()
 
 router.get('/', validateAccessToken, async (req, res) => {
   try {
     checkAdmin(req)
-    const response = await db.getAllLocations()
+    const response = await db.getAllCarProducts()
     res.status(200).json(response)
   } catch (error) {
     console.error(error)
@@ -17,11 +17,11 @@ router.get('/', validateAccessToken, async (req, res) => {
   }
 })
 
-router.delete('/:locationId', validateAccessToken, async (req, res) => {
+router.delete('/:carProductId', validateAccessToken, async (req, res) => {
   try {
     checkAdmin(req)
-    const locationId = Number(req.params.locationId)
-    await db.deleteLocation(locationId)
+    const carProductId = Number(req.params.carProductId)
+    await db.deleteCarProduct(carProductId)
 
     res.sendStatus(200)
   } catch (error) {
@@ -33,22 +33,22 @@ router.delete('/:locationId', validateAccessToken, async (req, res) => {
 router.post('/', validateAccessToken, async (req, res) => {
   try {
     checkAdmin(req)
-     const newLocation = req.body
-     await db.addLocation(newLocation)
+    const newCarProduct = req.body
+    await db.addCarProduct(newCarProduct)
 
-     res.sendStatus(201)
+    res.sendStatus(201)
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Something went wrong' })
   }
 })
 
-router.put('/:locationId', validateAccessToken, async (req, res) => {
+router.put('/:carProductId', validateAccessToken, async (req, res) => {
   try {
     checkAdmin(req)
-    const locationId = Number(req.params.locationId)
-    const updatedLocation = req.body
-    await db.editLocation(locationId, updatedLocation)
+    const carProductId = Number(req.params.carProductId)
+    const updatedCarProduct = req.body
+    await db.editCarProduct(carProductId, updatedCarProduct)
 
     res.sendStatus(200)
   } catch (error) {

@@ -2,11 +2,13 @@ import express from "express"
 
 import * as db from '../db/db_functions/models'
 import { validateAccessToken } from "../auth0"
+import checkAdmin from "./checkAdmin"
 
 const router = express.Router()
 
 router.get('/', validateAccessToken, async (req, res) => {
   try {
+    checkAdmin(req)
     const response = await db.getAllModels()
     res.status(200).json(response)
   } catch (error) {
@@ -17,6 +19,7 @@ router.get('/', validateAccessToken, async (req, res) => {
 
 router.delete('/:modelId', validateAccessToken, async (req, res) => {
   try {
+    checkAdmin(req)
     const modelId = Number(req.params.modelId)
     await db.deleteModel(modelId)
 
@@ -29,6 +32,7 @@ router.delete('/:modelId', validateAccessToken, async (req, res) => {
 
 router.post('/', validateAccessToken, async (req, res) => {
   try {
+    checkAdmin(req)
      const newModel = req.body
      await db.addModel(newModel)
 
@@ -41,6 +45,7 @@ router.post('/', validateAccessToken, async (req, res) => {
 
 router.put('/:modelId', validateAccessToken, async (req, res) => {
   try {
+    checkAdmin(req)
      const modelId = Number(req.params.modelId)
      const updatedModel = req.body
      await db.editModel(modelId, updatedModel)
