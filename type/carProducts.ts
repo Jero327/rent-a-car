@@ -17,3 +17,12 @@ export interface updatedCarProduct {
   daily_rate: number
   is_available: boolean
 }
+
+export interface carProductData {
+  id: number
+  rego_number: string
+  model: string
+  location: string
+  daily_rate: number
+  is_available: boolean
+}

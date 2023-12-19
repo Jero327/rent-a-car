@@ -1,12 +1,36 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { addCarProduct } from '../../../client_api/carProducts'
 import { useAuth0 } from '@auth0/auth0-react'
 import { newCarProduct } from '../../../../type/carProducts'
+import { getAllModels } from '../../../client_api/models'
+import { model } from '../../../../type/carModels'
+import { getAllLocations } from '../../../client_api/locations'
+import { location } from '../../../../type/locations'
 
 function AddCarProduct() {
   const { getAccessTokenSilently } = useAuth0()
   const [isAddCarProduct, setIsAddCarProduct] = useState(false)
+
+  async function retriveModels() {
+    const accessToken = await getAccessTokenSilently()
+    return await getAllModels(accessToken)
+  }
+
+  const { data: modelsData } = useQuery({
+    queryKey: ['models'],
+    queryFn: retriveModels,
+  })
+
+  async function retriveLocations() {
+    const accessToken = await getAccessTokenSilently()
+    return await getAllLocations(accessToken)
+  }
+
+  const { data: locationsData } = useQuery({
+    queryKey: ['locations'],
+    queryFn: retriveLocations,
+  })
 
   function handleAddNewCarProduct() {
     setIsAddCarProduct(!isAddCarProduct)
@@ -61,17 +85,21 @@ function AddCarProduct() {
           <label>
             Model:
             <select name="model">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              {modelsData.map((m: model) => (
+                <option key={m.id} value={m.id}>
+                  {m.name}
+                </option>
+              ))}
             </select>
           </label>
           <label>
             Location:
             <select name="location">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              {locationsData.map((l: location) => (
+                <option key={l.id} value={l.id}>
+                  {l.name}
+                </option>
+              ))}
             </select>
           </label>
           <label>
