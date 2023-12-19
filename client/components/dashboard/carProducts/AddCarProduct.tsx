@@ -60,11 +60,19 @@ function AddCarProduct() {
           </label>
           <label>
             Model:
-            <input name="model" type="number" required></input>
+            <select name="model">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
           </label>
           <label>
             Location:
-            <input name="location" type="number" required></input>
+            <select name="location">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
           </label>
           <label>
             Daily rate:
