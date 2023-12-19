@@ -32,7 +32,7 @@ function AddCarProduct() {
     const model = Number(form.get('model')) as number
     const location = Number(form.get('location')) as number
     const daily_rate = Number(form.get('daily_rate')) as number
-    const is_available = form.get('is_available') === 'true'
+    const is_available = form.get('is_available') === 'on'
 
     const newCarProduct = {
       rego_number: rego_number,
