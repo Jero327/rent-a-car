@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { searchCarProducts } from '../client_api/carProducts'
 import { useQuery } from '@tanstack/react-query'
 import { searchCarProductsData } from '../../type/carProducts'
+import SearchCarProductItem from './SearchCarProductItem'
 
 function Search() {
   const { getAccessTokenSilently } = useAuth0()
@@ -41,17 +42,7 @@ function Search() {
       <h5>{drop_time}</h5>
       <ul>
         {searchCarProductsData?.map((s: searchCarProductsData) => (
-          <li key={s.id}>
-            Model: {s.model}
-            <br />
-            Make: {s.make}
-            <br />
-            Daily_rate: {s.daily_rate}
-            <br />
-            Year: {s.year}
-            <br />
-            Fuel_type: {s.fuel_type}
-          </li>
+          <SearchCarProductItem key={s.id} {...s} />
         ))}
       </ul>
     </>
