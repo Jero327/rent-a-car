@@ -6,8 +6,9 @@ import { validateAccessToken } from '../auth0'
 const router = express.Router()
 
 router.post('/', validateAccessToken, async (req, res) => {
+  const auth0Id = req.auth?.payload.sub as string
   try {
-    const newRental = req.body
+    const newRental = { ...req.body, user_id: auth0Id }
     await db.addRental(newRental)
 
     res.sendStatus(201)
