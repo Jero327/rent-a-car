@@ -1,17 +1,61 @@
-import { useSearchParams } from "react-router-dom"
+import { useAuth0 } from '@auth0/auth0-react'
+import { useSearchParams } from 'react-router-dom'
+import { searchCarProducts } from '../client_api/carProducts'
+import { useQuery } from '@tanstack/react-query'
+import { searchCarProductsData } from '../../type/carProducts'
 
 function Search() {
+  const { getAccessTokenSilently } = useAuth0()
+
   const [searchParams] = useSearchParams()
-  const pick_up = searchParams.get('pick_up')
+  const pick_up_id = Number(searchParams.get('pick_up')?.split('-')[0])
+  const pick_up = searchParams.get('pick_up')?.split('-')[1]
   const pick_up_time = searchParams.get('pick_up_time')
   const drop = searchParams.get('drop')
   const drop_time = searchParams.get('drop_time')
-  console.log(pick_up)
-  console.log(pick_up_time)
-  console.log(drop)
-  console.log(drop_time)
 
-  return(<><h2>This is search result page</h2></>)
+  async function retriveSearchCarProductsData() {
+    const accessToken = await getAccessTokenSilently()
+    return await searchCarProducts(pick_up_id, accessToken)
+  }
+
+  const {
+    data: searchCarProductsData,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['searchCarProductsData'],
+    queryFn: retriveSearchCarProductsData,
+  })
+
+  if (isLoading) return <div>Loading...</div>
+
+  if (error) return <div>Something wrong!</div>
+
+  return (
+    <>
+      <h2>This is search result page</h2>
+      <h4>Pickup: {pick_up}</h4>
+      <h5>{pick_up_time}</h5>
+      <h4>Return: {drop}</h4>
+      <h5>{drop_time}</h5>
+      <ul>
+        {searchCarProductsData?.map((s: searchCarProductsData) => (
+          <li key={s.id}>
+            Model: {s.model}
+            <br />
+            Make: {s.make}
+            <br />
+            Daily_rate: {s.daily_rate}
+            <br />
+            Year: {s.year}
+            <br />
+            Fuel_type: {s.fuel_type}
+          </li>
+        ))}
+      </ul>
+    </>
+  )
 }
 
 export default Search

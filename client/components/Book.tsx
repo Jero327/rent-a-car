@@ -53,7 +53,7 @@ function Booking() {
               Select a Location
             </option>
             {locationsData?.map((l: location) => (
-              <option key={l.id} value={l.id}>
+              <option key={l.id} value={`${l.id}-${l.name}`}>
                 {l.name}
               </option>
             ))}
@@ -70,7 +70,7 @@ function Booking() {
               Select a Location
             </option>
             {locationsData?.map((l: location) => (
-              <option key={l.id} value={l.id}>
+              <option key={l.id} value={l.name}>
                 {l.name}
               </option>
             ))}

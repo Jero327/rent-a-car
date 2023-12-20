@@ -37,3 +37,14 @@ export async function updateCarProduct(
     .set('Content-Type', 'application/json')
     .send(newCarProduct)
 }
+
+export async function searchCarProducts(
+  locationId: number,
+  token: string
+) {
+  const response = await request
+    .get(`${baseURL}/${locationId}`)
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+  return response.body
+}
