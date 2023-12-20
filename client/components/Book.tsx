@@ -2,8 +2,10 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { getAllLocations } from '../client_api/locations'
 import { useQuery } from '@tanstack/react-query'
 import { location } from '../../type/locations'
+import { useNavigate } from 'react-router-dom'
 
 function Booking() {
+  const navigate = useNavigate()
   const { getAccessTokenSilently } = useAuth0()
   async function retriveLocations() {
     const accessToken = await getAccessTokenSilently()
@@ -23,12 +25,27 @@ function Booking() {
 
   if (error) return <div>Something wrong!</div>
 
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    const formData = new FormData(e.currentTarget)
+
+    const pick_up = formData.get('pick_up')
+    const pick_up_time = formData.get('pick_up_time')
+    const drop = formData.get('return')
+    const drop_time = formData.get('return_time')
+
+    navigate(
+      `/search?pick_up=${pick_up}&pick_up_time=${pick_up_time}&drop=${drop}&drop_time=${drop_time}`
+    )
+  }
+
   return (
     <>
       <h2>This is Booking page.</h2>
       <br />
       <br />
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Pick up:
           <select name="pick_up">
