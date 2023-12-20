@@ -28,9 +28,16 @@ function Layout() {
       <Link to={`/`}>
         <h1>Rent a car!</h1>
       </Link>
-      <main>
-        <Outlet />
-      </main>
+
+      <IfAuthenticated>
+        <main>
+          <Outlet />
+        </main>
+      </IfAuthenticated>
+
+      <IfNotAuthenticated>
+        <h3>Please Sign In to book your next adventure!</h3>
+      </IfNotAuthenticated>
     </>
   )
 }
