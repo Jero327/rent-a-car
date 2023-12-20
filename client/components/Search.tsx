@@ -10,10 +10,10 @@ function Search() {
 
   const [searchParams] = useSearchParams()
   const pick_up_id = Number(searchParams.get('pick_up')?.split('-')[0])
-  const pick_up = searchParams.get('pick_up')?.split('-')[1]
-  const pick_up_time = searchParams.get('pick_up_time')
-  const drop = searchParams.get('drop')
-  const drop_time = searchParams.get('drop_time')
+  const pick_up = searchParams.get('pick_up')?.split('-')[1] as string
+  const pick_up_time = searchParams.get('pick_up_time') as string
+  const drop = searchParams.get('drop') as string
+  const drop_time = searchParams.get('drop_time') as string
 
   async function retriveSearchCarProductsData() {
     const accessToken = await getAccessTokenSilently()
@@ -42,7 +42,14 @@ function Search() {
       <h5>{drop_time}</h5>
       <ul>
         {searchCarProductsData?.map((s: searchCarProductsData) => (
-          <SearchCarProductItem key={s.id} {...s} />
+          <SearchCarProductItem
+            key={s.id}
+            {...s}
+            start_date={pick_up_time}
+            end_date={drop_time}
+            start_location={pick_up}
+            end_location={drop}
+          />
         ))}
       </ul>
     </>

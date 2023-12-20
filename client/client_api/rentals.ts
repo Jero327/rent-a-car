@@ -1,7 +1,14 @@
 import request from 'superagent'
-import { newRental } from '../../type/rentals'
 
 const baseURL = '/api/v1/rentals'
+
+interface newRental {
+  carProducts_id: number
+  start_date: string
+  end_date: string
+  start_location: string
+  end_location: string
+}
 
 export async function addRental(newRental: newRental, token: string) {
   await request
