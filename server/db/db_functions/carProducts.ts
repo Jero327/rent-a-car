@@ -30,3 +30,21 @@ export async function editCarProduct(
 ) {
   await db('carProducts').where('id', carProductId).update(updatedCarProduct)
 }
+
+export async function getSearchCarProducts(locationId: number) {
+  const res = await db('carProducts')
+    .join('models', 'carProducts.model_id', 'models.id')
+    .join('locations', 'carProducts.location_id', 'locations.id')
+    .where('locations.id', locationId)
+    .where('carProducts.is_available', true)
+    .select(
+      'carProducts.id as id',
+      'carProducts.daily_rate as daily_rate',
+      'models.name as model',
+      'models.make as make',
+      'models.year as year',
+      'models.fuel_type as fuel_type',
+      'locations.name as location'
+    )
+  return res.reverse()
+}

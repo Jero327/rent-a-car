@@ -57,4 +57,16 @@ router.put('/:carProductId', validateAccessToken, async (req, res) => {
   }
 })
 
+router.get('/:locationId', validateAccessToken, async (req, res) => {
+  try {
+    const locationId = Number(req.params.locationId)
+    const response = await db.getSearchCarProducts(locationId)
+
+    res.status(200).json(response)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Something went wrong' })
+  }
+})
+
 export default router
