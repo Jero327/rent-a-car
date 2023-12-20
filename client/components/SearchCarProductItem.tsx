@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { searchCarProductsData } from '../../type/carProducts'
 import { addRental } from '../client_api/rentals'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useNavigate } from 'react-router-dom'
 
 interface Props extends searchCarProductsData {
   start_date: string
@@ -11,6 +12,8 @@ interface Props extends searchCarProductsData {
 }
 
 function SearchCarProductItem(props: Props) {
+  const navigate = useNavigate()
+
   const [confirm, setConfirm] = useState(false)
   const { getAccessTokenSilently } = useAuth0()
 
@@ -19,12 +22,13 @@ function SearchCarProductItem(props: Props) {
     start_date: props.start_date,
     end_date: props.end_date,
     start_location: props.start_location,
-    end_location: props.end_location
+    end_location: props.end_location,
   }
 
-  async function handleConfirm(){
+  async function handleConfirm() {
     const accessToken = await getAccessTokenSilently()
     await addRental(newRental, accessToken)
+    navigate(`/mybooking`)
   }
 
   return (

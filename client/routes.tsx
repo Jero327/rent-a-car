@@ -7,12 +7,14 @@ import Locations from './components/dashboard/locations/Locations'
 import CarProducts from './components/dashboard/carProducts/CarProducts'
 import Booking from './components/Book'
 import Search from './components/Search'
+import MyBooking from './components/MyBooking'
 
 export default createRoutesFromElements(
   <Route path="/" element={<Layout />}>
     <Route index element={<HomePage />} />
     <Route path="booking" element={<Booking />} />
     <Route path="search" element={<Search />} />
+    <Route path="mybooking" element={<MyBooking />} />
     <Route path="dashboard" element={<Dashboard />}>
       <Route path="models" element={<Models />} />
       <Route path="locations" element={<Locations />} />
