@@ -31,14 +31,19 @@ export async function editCarProduct(
   await db('carProducts').where('id', carProductId).update(updatedCarProduct)
 }
 
-interface conflict  {
-  id: number
+interface conflict {
+  carProducts_id: number
   start_date: string
   end_date: string
 }
 
+// API: provide results based on users' selection of pick up location, pick up time and return time
 export async function getSearchCarProducts(locationId: number, start: string, end: string) {
-  const rentals = await db('rentals').select('id', 'start_date', 'end_date')
+  const rentals = await db('rentals').select(
+    'carProducts_id',
+    'start_date',
+    'end_date'
+  )
   const conflict_a = rentals.filter(
     (c: conflict) => c.start_date >= start && c.start_date <= end
   )
@@ -49,7 +54,10 @@ export async function getSearchCarProducts(locationId: number, start: string, en
     (c: conflict) => c.start_date <= start && c.end_date >= end
   )
 
-  const conflicts = [...conflict_a, ...conflict_b, ...conflict_c].map((c: conflict) => c.id)
+  // conflicts are the cars that have already been booked during the period between pick up time and return time
+  const conflicts = [...conflict_a, ...conflict_b, ...conflict_c].map(
+    (c: conflict) => c.carProducts_id
+  )
   
   const res = await db('carProducts')
     .join('models', 'carProducts.model_id', 'models.id')
