@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom"
-import { IfAuthenticated, IfNotAuthenticated } from "./Authenticated"
+import { Link } from 'react-router-dom'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 function HomePage() {
   return (
     <>
       <h2>This is HomePage.</h2>
-      <Link to={`/dashboard`}>Admin Page</Link><br />
+      <Link to={`/dashboard`}>Admin Page</Link>
+      <br />
 
       <IfAuthenticated>
+        <Link to={`/mybooking`}>My Booking</Link>
+        <br />
         <Link to={`/booking`}>Book Now</Link>
       </IfAuthenticated>
       <IfNotAuthenticated>
