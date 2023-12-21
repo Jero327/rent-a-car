@@ -31,12 +31,32 @@ export async function editCarProduct(
   await db('carProducts').where('id', carProductId).update(updatedCarProduct)
 }
 
-export async function getSearchCarProducts(locationId: number) {
+interface conflict  {
+  id: number
+  start_date: string
+  end_date: string
+}
+
+export async function getSearchCarProducts(locationId: number, start: string, end: string) {
+  const rentals = await db('rentals').select('id', 'start_date', 'end_date')
+  const conflict_a = rentals.filter(
+    (c: conflict) => c.start_date >= start && c.start_date <= end
+  )
+  const conflict_b = rentals.filter(
+    (c: conflict) => c.end_date >= start && c.end_date <= end
+  )
+  const conflict_c = rentals.filter(
+    (c: conflict) => c.start_date <= start && c.end_date >= end
+  )
+
+  const conflicts = [...conflict_a, ...conflict_b, ...conflict_c].map((c: conflict) => c.id)
+  
   const res = await db('carProducts')
     .join('models', 'carProducts.model_id', 'models.id')
     .join('locations', 'carProducts.location_id', 'locations.id')
     .where('locations.id', locationId)
     .where('carProducts.is_available', true)
+    .whereNotIn('carProducts.id', conflicts)
     .select(
       'carProducts.id as id',
       'carProducts.daily_rate as daily_rate',
@@ -46,5 +66,6 @@ export async function getSearchCarProducts(locationId: number) {
       'models.fuel_type as fuel_type',
       'locations.name as location'
     )
+
   return res.reverse()
 }
