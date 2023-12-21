@@ -57,6 +57,10 @@ function Search() {
           />
         ))}
       </ul>
+
+      {searchCarProductsData?.length === 0 ? (
+        <>Sorry, that time slot is fully booked...</>
+      ) : null}
     </>
   )
 }

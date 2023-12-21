@@ -42,6 +42,8 @@ function MyBooking() {
           </li>
         ))}
       </ul>
+
+      {data?.length===0?<>No bookings yet...</>:null}
     </>
   )
 }
