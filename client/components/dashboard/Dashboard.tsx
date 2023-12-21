@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 function Dashboard() {
   const [isAdmin, setIsAdmin] = useState('')
-  
+
   const {
     user,
     isLoading,
@@ -13,7 +13,6 @@ function Dashboard() {
     loginWithRedirect,
     getAccessTokenSilently,
   } = useAuth0()
-  console.log(user)
 
   if (isLoading) {
     return <div>Loading ...</div>
@@ -28,11 +27,9 @@ function Dashboard() {
     const accessToken = await getAccessTokenSilently()
     const res = await checkIsAdmin(accessToken)
     setIsAdmin(res)
-    console.log(isAdmin)
   }
 
   checkAdmin()
-  
 
   return (
     <>

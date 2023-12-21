@@ -5,6 +5,7 @@ import models from './routes/models'
 import locations from './routes/locations'
 import carproducts from './routes/carProducts'
 import isAdmin from './routes/isAdmin'
+import rentals from './routes/rentals'
 
 const server = express()
 
@@ -14,6 +15,7 @@ server.use('/api/v1/models', models)
 server.use('/api/v1/locations', locations)
 server.use('/api/v1/carproducts', carproducts)
 server.use('/api/v1/isAdmin', isAdmin)
+server.use('/api/v1/rentals', rentals)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))

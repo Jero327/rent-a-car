@@ -1,5 +1,4 @@
 export async function seed(knex) {
-  await knex('carProducts').del()
   await knex('carProducts').insert([
     {
       rego_number: 'ABC123',
@@ -21,6 +20,13 @@ export async function seed(knex) {
       location_id: 3,
       daily_rate: 100,
       is_available: true,
+    },
+    {
+      rego_number: 'ABC126',
+      model_id: 3,
+      location_id: 3,
+      daily_rate: 100,
+      is_available: false,
     },
   ])
 }

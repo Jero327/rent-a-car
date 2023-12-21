@@ -57,4 +57,26 @@ router.put('/:carProductId', validateAccessToken, async (req, res) => {
   }
 })
 
+router.get(
+  '/:locationId/:start_date/:end_date',
+  validateAccessToken,
+  async (req, res) => {
+    try {
+      const locationId = Number(req.params.locationId)
+      const start_date = req.params.start_date
+      const end_date = (req.params.end_date)
+      const response = await db.getSearchCarProducts(
+        locationId,
+        start_date,
+        end_date
+      )
+
+      res.status(200).json(response)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ message: 'Something went wrong' })
+    }
+  }
+)
+
 export default router

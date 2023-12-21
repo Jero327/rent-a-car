@@ -26,3 +26,13 @@ export interface carProductData {
   daily_rate: number
   is_available: boolean
 }
+
+export interface searchCarProductsData {
+  id: number
+  daily_rate: number
+  model: string
+  make: string
+  year: number
+  fuel_type: string
+  location: string
+}
