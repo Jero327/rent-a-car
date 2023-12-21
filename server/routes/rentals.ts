@@ -18,4 +18,16 @@ router.post('/', validateAccessToken, async (req, res) => {
   }
 })
 
+router.get('/', validateAccessToken, async (req, res) => {
+  const auth0Id = req.auth?.payload.sub as string
+  try {
+    const response = await db.getRentalsInfo(auth0Id)
+
+    res.status(200).json(response)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Something went wrong' })
+  }
+})
+
 export default router
