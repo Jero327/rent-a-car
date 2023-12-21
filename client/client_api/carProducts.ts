@@ -40,10 +40,12 @@ export async function updateCarProduct(
 
 export async function searchCarProducts(
   locationId: number,
-  token: string
+  token: string,
+  start_date: string,
+  end_date: string
 ) {
   const response = await request
-    .get(`${baseURL}/${locationId}`)
+    .get(`${baseURL}/${locationId}/${start_date}/${end_date}`)
     .set('Authorization', `Bearer ${token}`)
     .set('Content-Type', 'application/json')
   return response.body

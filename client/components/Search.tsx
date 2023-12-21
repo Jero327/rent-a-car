@@ -17,7 +17,12 @@ function Search() {
 
   async function retriveSearchCarProductsData() {
     const accessToken = await getAccessTokenSilently()
-    return await searchCarProducts(pick_up_id, accessToken)
+    return await searchCarProducts(
+      pick_up_id,
+      accessToken,
+      pick_up_time,
+      drop_time
+    )
   }
 
   const {
