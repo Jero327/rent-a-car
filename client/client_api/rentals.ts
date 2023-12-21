@@ -17,3 +17,12 @@ export async function addRental(newRental: newRental, token: string) {
     .set('Content-Type', 'application/json')
     .send(newRental)
 }
+
+export async function getRentals(token: string) {
+  const res = await request
+    .get(`${baseURL}`)
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+
+  return res.body
+}
