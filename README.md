@@ -72,3 +72,7 @@ cp .env.example .env
 ```
 npm run test
 ```
+
+ERD:
+
+![image info](./ERD.PNG)
