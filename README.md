@@ -43,7 +43,22 @@ This APP helps users rent car from business.
 
 The following routes should accept only authenticated requests
 
-- GET `/api/v1/cars`
+- GET `/api/v1/models`
+- DELETE `/api/v1/models/:modelId`
+- POST `/api/v1/models`
+- PUT `/api/v1/models/:modelId`
+- GET `/api/v1/locations`
+- DELETE `/api/v1/locations/:locationId`
+- POST `/api/v1/locations`
+- PUT `/api/v1/locations/:locationId`
+- GET `/api/v1/carproducts`
+- DELETE `/api/v1/carproducts/:carProductId`
+- POST `/api/v1/carproducts`
+- PUT `/api/v1/carproducts/:carProductId`
+- GET `/api/v1/carproducts/:locationId/:start_date/:end_date`
+- GET `/api/v1/rentals`
+- POST `/api/v1/rentals`
+- GET `/api/v1/isAdmin`
   <br />
 
 #### .env
