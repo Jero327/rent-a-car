@@ -3,8 +3,11 @@ import { getAllLocations } from '../client_api/locations'
 import { useQuery } from '@tanstack/react-query'
 import { location } from '../../type/locations'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 function Booking() {
+  const today = new Date().toISOString().split('T')[0]
+  const [pickDate, setPickDate] = useState(today)
   const navigate = useNavigate()
   const { getAccessTokenSilently } = useAuth0()
   async function retriveLocations() {
@@ -61,7 +64,13 @@ function Booking() {
         </label>
         <label>
           Pick up Time:
-          <input name="pick_up_time" type="date" required></input>
+          <input
+            name="pick_up_time"
+            type="date"
+            min={today}
+            required
+            onChange={(e) => setPickDate(e.currentTarget.value)}
+          ></input>
         </label>
         <label>
           Return:
@@ -78,7 +87,7 @@ function Booking() {
         </label>
         <label>
           Return Time:
-          <input name="return_time" type="date" required></input>
+          <input name="return_time" type="date" min={pickDate} required></input>
         </label>
         <input type="submit" value="Find my car"></input>
       </form>
