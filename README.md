@@ -55,6 +55,7 @@ The following routes should accept only authenticated requests from users with a
 - POST `/api/v1/carproducts`
 - PUT `/api/v1/carproducts/:carProductId`
 - GET `/api/v1/isAdmin`
+- GET `/api/v1/rentals/allrentalsinfo`
 
 The following routes should accept only authenticated requests
 
