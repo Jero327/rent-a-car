@@ -43,6 +43,8 @@ function Dashboard() {
           <Link to={`/dashboard/locations`}>Manage Locations</Link>
           <br />
           <Link to={`/dashboard/carproducts`}>Manage car products</Link>
+          <br />
+          <Link to={`/dashboard/rentals`}>Manage rentals</Link>
           <Outlet />
         </>
       ) : (
