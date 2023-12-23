@@ -23,13 +23,13 @@ function ModelItem(props: model) {
     mutation.mutate()
   }
 
-  async function insertModel(m: newModel) {
+  async function editModel(m: newModel) {
     const accessToken = await getAccessTokenSilently()
     await updateModel(props.id, m, accessToken)
   }
 
   const editMutation = useMutation({
-    mutationFn: (model: newModel) => insertModel(model),
+    mutationFn: (model: newModel) => editModel(model),
     onSuccess: () => queryClient.invalidateQueries(['models']),
   })
 
