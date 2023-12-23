@@ -23,3 +23,9 @@ export interface myRentals {
   year: number
   fuel_type: string
 }
+
+export interface allRentals extends myRentals {
+  user_id: string
+  rego_number: string
+  is_available: boolean
+}

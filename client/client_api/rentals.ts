@@ -26,3 +26,12 @@ export async function getRentals(token: string) {
 
   return res.body
 }
+
+export async function getAllRentals(token: string) {
+  const res = await request
+    .get(`${baseURL}/allrentalsinfo`)
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+
+  return res.body
+}

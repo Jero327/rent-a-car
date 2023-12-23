@@ -41,13 +41,12 @@ This APP helps users rent car from business.
 
 #### **Server-side**
 
-The following routes should accept only authenticated requests
+The following routes should accept only authenticated requests from users with admin role
 
 - GET `/api/v1/models`
 - DELETE `/api/v1/models/:modelId`
 - POST `/api/v1/models`
 - PUT `/api/v1/models/:modelId`
-- GET `/api/v1/locations`
 - DELETE `/api/v1/locations/:locationId`
 - POST `/api/v1/locations`
 - PUT `/api/v1/locations/:locationId`
@@ -55,10 +54,16 @@ The following routes should accept only authenticated requests
 - DELETE `/api/v1/carproducts/:carProductId`
 - POST `/api/v1/carproducts`
 - PUT `/api/v1/carproducts/:carProductId`
+- GET `/api/v1/isAdmin`
+- GET `/api/v1/rentals/allrentalsinfo`
+
+The following routes should accept only authenticated requests
+
+- GET `/api/v1/locations`
 - GET `/api/v1/carproducts/:locationId/:start_date/:end_date`
 - GET `/api/v1/rentals`
 - POST `/api/v1/rentals`
-- GET `/api/v1/isAdmin`
+
   <br />
 
 #### .env

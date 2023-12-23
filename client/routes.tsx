@@ -8,6 +8,7 @@ import CarProducts from './components/dashboard/carProducts/CarProducts'
 import Booking from './components/Book'
 import Search from './components/Search'
 import MyBooking from './components/MyBooking'
+import Rentals from './components/dashboard/rentals/Rentals'
 
 export default createRoutesFromElements(
   <Route path="/" element={<Layout />}>
@@ -19,6 +20,7 @@ export default createRoutesFromElements(
       <Route path="models" element={<Models />} />
       <Route path="locations" element={<Locations />} />
       <Route path="carproducts" element={<CarProducts />} />
+      <Route path="rentals" element={<Rentals />} />
     </Route>
   </Route>
 )
