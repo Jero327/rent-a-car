@@ -1,6 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { getAllRentals } from '../../../client_api/rentals'
 import { useQuery } from '@tanstack/react-query'
+import { allRentals } from '../../../../type/rentals'
 
 function RentalsList() {
   const { getAccessTokenSilently } = useAuth0()
@@ -22,7 +23,7 @@ function RentalsList() {
   return (
     <>
       {data?.length > 0 ? (
-        <ul>{data.map((r) => r.rentals_id)}</ul>
+        <ul>{data.map((r: allRentals) => r.rentals_id)}</ul>
       ) : (
         <>Currently, there are no rentals to display</>
       )}
